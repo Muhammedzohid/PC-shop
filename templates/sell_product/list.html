@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <h1>Sell Product List</h1>
+
+    <!-- Filter Form -->
+    <form method="get">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" name="start_date">
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" name="end_date">
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- Filtered Results -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Data</th>
+                <th>Price</th>
+            </tr>   
+        </thead>
+        <tbody>
+            {% for sell_product in sell_products %}
+            <tr>
+               <td><a href="{% url 'sellproduct_detail' sell_product.code %}">{{ sell_product.product.name }}</a></td>
+                <td>{{ sell_product.quantity }}</td>
+                <td>{{ sell_product.sold_at }}</td>
+                <td>{{ sell_product.price }} uzs</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding-top: 100px;
+    }
+    form {
+        margin-bottom: 20px;
+    }
+    label {
+        margin-right: 10px;
+    }
+    input[type="number"] {
+        width: 100px;
+        padding: 5px;
+        margin-right: 10px;
+    }
+    button[type="submit"] {
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    tr:hover {
+        background-color: #f2f2f2;
+    }
+</style>
+
+
+{% endblock %}

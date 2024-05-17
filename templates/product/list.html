@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<header>
+    <h1>Product Management System</h1>
+</header>
+
+<div class="container">
+    <h2>Product List</h2>
+
+    <ul>
+        {% for product in products %}
+            <div class="product-info">
+                <a href="{% url 'product_detail' product.code %}"><span>{{ product.name }} - Price: ${{ product.price }}</span></a>
+                <div class="product-actions">
+                    <a href="{% url 'delete_product' product.code %}" class="delete-link">Delete</a>
+                </div>
+                <div class="product-actions">
+                    <a href="{% url 'update_product' product.code %}">Update</a>
+                </div>
+            </div>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'create_product' %}" class="add-link">Add Product</a>
+</div>
+
+<style>
+    /* Product List styles */
+
+    .product {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .product-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .product-actions {
+        display: flex;
+        align-items: center;
+    }
+
+    .delete-link {
+        color: red;
+        margin-left: 10px;
+    }
+
+    .add-link {
+        display: block;
+        margin-top: 20px;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .add-link:hover {
+        background-color: #555;
+    }
+</style>
+
+{% endblock %}

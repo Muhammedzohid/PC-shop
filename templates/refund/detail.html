@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Product Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            padding-top:100px ;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Refund Product Detail</h1>
+
+<p><strong>Quantity:</strong> {{ refund.sell_product.quantity }}</p>
+<p><strong>Refunded At:</strong> {{ refund.refunded_at }}</p>
+<p><strong>Price:</strong> {{ refund.price }} uzs</p>
+
+
+</body>
+</html>
+
+{% endblock %}

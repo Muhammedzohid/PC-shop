@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form action="{% url 'filter_entries' %}" method="GET">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="start_date">
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="end_date">
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    
+    {% if entries %}
+        <h2>Filtered Results</h2>
+        <p>Total Entries: {{ total_entries }}</p>
+        <p>Total Entries Price: {{ total_entries_price }}</p>
+        <p>Total Sales: {{ total_sales }}</p>
+        <p>Total Sales Price: {{ total_sales_price }}</p>
+        <p>Total Price Per Product: {{ total_price_per_product }}</p>
+        <p>Total Expenses: {{ total_expenses }}</p>
+        <p>Total Profit: {{ total_profit }}</p>
+        <ul>
+            {% for entry in entries %}
+                <li>{{ entry }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

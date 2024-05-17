@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Sell Product Detail</h1>
+
+<p><strong>Product:</strong> {{ sellproduct.product }}</p>
+<p><strong>Quantity:</strong> {{ sellproduct.quantity }}</p>
+<p><strong>Sold At:</strong> {{ sellproduct.sold_at }}</p>
+<p><strong>Price:</strong> {{ sellproduct.price }} uzs</p>
+<div class="product-actions">
+    <a class="btn btn-primary" href="{% url 'refund' sellproduct.code %}">refund</a>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        padding-top:100px ;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    p {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
+</style>
+
+{% endblock %}

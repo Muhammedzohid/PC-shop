@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'user_edit' %}" style="padding-top: 100px;">
+    {% csrf_token %}
+    <label for="username">Foydalanuvchi nomi:</label>
+    <input type="text" id="username" name="username" value="{{ superuser.username }}">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="{{ superuser.email }}">
+    <label for="email">Password:</label>
+    <input type="password" id="password" name="password" value="{{ superuser.password }}">
+    <input type="submit" value="Saqlash">
+  </form>
+
+
+{% endblock %}
