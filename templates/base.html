@@ -204,75 +204,131 @@
                                         </ul>
                                     </li>
                                 </li>
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-toggle" href="javascript:void(0);">
+                                        <span class="icon-holder">
+                                            <i class="anticon anticon-ordered-list"></i>
+                                        </span>
+                                        <span class="title">Sell Product</span>
+                                        <span class="arrow">
+                                            <i class="arrow-icon"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="{% url 'sellproduct_create' %}">
+                                                <i class="anticon anticon-plus-circle"></i>
+                                                Create
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'sellproduct_list' %}">
+                                                <span class="icon-holder">
+                                                    <i class="fas fa-align-justify"></i>
+                                                    List
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    
+                                </li>
+                            </li>
                                 <li>
                                     <li class="nav-item dropdown">
                                         <a class="dropdown-toggle" href="javascript:void(0);">
                                             <span class="icon-holder">
                                                 <i class="anticon anticon-ordered-list"></i>
                                             </span>
-                                            <span class="title">Sell Product</span>
+                                            <span class="title">Product</span>
                                             <span class="arrow">
                                                 <i class="arrow-icon"></i>
                                             </span>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a href="{% url 'sellproduct_create' %}">
+                                                <a href="{% url 'create_product' %}">
                                                     <i class="anticon anticon-plus-circle"></i>
                                                     Create
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{% url 'sellproduct_list' %}">
+                                                <a href="{% url 'product_list' %}">
                                                     <span class="icon-holder">
                                                         <i class="fas fa-align-justify"></i>
                                                         List
                                                     </span>
                                                 </a>
                                             </li>
+                                            <li>
+                                                <li class="nav-item dropdown">
+                                                    <a class="dropdown-toggle" href="javascript:void(0);">
+                                                        <span class="icon-holder">
+                                                            <i class="anticon anticon-ordered-list"></i>
+                                                        </span>
+                                                        <span class="title">Sell Product</span>
+                                                        <span class="arrow">
+                                                            <i class="arrow-icon"></i>
+                                                        </span>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="{% url 'sellproduct_create' %}">
+                                                                <i class="anticon anticon-plus-circle"></i>
+                                                                Create
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{% url 'sellproduct_list' %}">
+                                                                <span class="icon-holder">
+                                                                    <i class="fas fa-align-justify"></i>
+                                                                    List
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    
+                                                </li>
+                                            </li>
                                         </ul>
                                     </li>
                                 </li>
+                                <!-- <li class="active">
+                                    <a href="index-projects.html">Projects</a>
+                                </li> -->
                             </ul>
                         </li>
-                    </li>
-                    <!-- <li class="active">
-                        <a href="index-projects.html">Projects</a>
-                    </li> -->
-                </ul>
-            </li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+            <!-- Side Nav END -->
             
+            <!-- Page Container START -->
+            <div class="page-container">
+                
+                {% block content %}
+                {% endblock %}
+                
+            </div>
+            <!-- Page Container END -->
             
-        </ul>
+        </div>
     </div>
-</div>
-<!-- Side Nav END -->
-
-<!-- Page Container START -->
-<div class="page-container">
     
-    {% block content %}
-    {% endblock %}
     
-</div>
-<!-- Page Container END -->
-
-</div>
-</div>
-
-
-<!-- Core Vendors JS -->
-<script src="{% static 'dashboard/js/vendors.min.js' %}"></script>
-
-<!-- page js -->
-<script src="{% static 'dashboard/vendors/chartjs/Chart.min.js' %}"></script>
-<script src="{% static 'dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
-<script src="{% static 'dashboard/js/pages/dashboard-project.js' %}"></script>
-
-
-<!-- Core JS -->
-<script src="{% static 'dashboard/js/app.min.js' %}"></script>
-
+    <!-- Core Vendors JS -->
+    <script src="{% static 'dashboard/js/vendors.min.js' %}"></script>
+    
+    <!-- page js -->
+    <script src="{% static 'dashboard/vendors/chartjs/Chart.min.js' %}"></script>
+    <script src="{% static 'dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'dashboard/js/pages/dashboard-project.js' %}"></script>
+    
+    
+    <!-- Core JS -->
+    <script src="{% static 'dashboard/js/app.min.js' %}"></script>
+    
 </body>
 
 </html>

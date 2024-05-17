@@ -15,10 +15,10 @@
             <div class="product-info">
                 <a href="{% url 'product_detail' product.code %}"><span>{{ product.name }} - Price: ${{ product.price }}</span></a>
                 <div class="product-actions">
-                    <a href="{% url 'delete_product' product.code %}" class="delete-link">Delete</a>
+                    <a class="btn btn-danger" href="{% url 'delete_product' product.code %}" class="delete-link">Delete</a>
                 </div>
                 <div class="product-actions">
-                    <a href="{% url 'update_product' product.code %}">Update</a>
+                    <a class="btn btn-primary" href="{% url 'update_product' product.code %}">Update</a>
                 </div>
             </div>
         {% endfor %}
@@ -44,11 +44,6 @@
         align-items: center;
     }
 
-    .product-actions {
-        display: flex;
-        align-items: center;
-    }
-
     .delete-link {
         color: red;
         margin-left: 10px;
@@ -67,6 +62,9 @@
 
     .add-link:hover {
         background-color: #555;
+    }
+    .product-actions{
+        padding-bottom: 20px;
     }
 </style>
 
