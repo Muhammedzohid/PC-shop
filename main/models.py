@@ -5,6 +5,7 @@ from django.conf import settings
 import os
 from random import sample
 import string
+from decimal import Decimal
 
 # Create your models here.
 
@@ -64,14 +65,15 @@ class EnterProduct(CodeGenerate):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     entered_at = models.DateField(auto_now_add=True)
-    price = models.IntegerField(blank=True, null=True)
+    price = models.DecimalField(decimal_places=2, max_digits=15, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        self.price = self.quantity * self.product.price
-
+        # Narxlarni ko'paytirish uchun integer ko'rsatuvlarini Decimal qilamiz
+        self.price = Decimal(self.quantity) * Decimal(self.product.price)
         super().save(*args, **kwargs)
 
-        product_quantity = self.product.quantity - self.quantity
+        # Mavjud mahsulot miqdoridan kirim qilgan miqdorni ayirib olamiz
+        product_quantity = Decimal(self.product.quantity) - Decimal(self.quantity)
         self.product.quantity = product_quantity
         self.product.save()
 
@@ -89,7 +91,7 @@ class SellProduct(CodeGenerate):
     price = models.IntegerField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        self.price = self.quantity * self.product.price
+        self.price = Decimal(self.quantity) * Decimal(self.product.price)
         return super().save(*args, **kwargs)
     
     @property

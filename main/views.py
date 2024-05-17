@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from datetime import datetime
 from . import models
-
+from django.http import HttpResponse
 # Create your views here.
 @login_required
 def index(request):
@@ -162,10 +162,14 @@ def sellproduct_update(request, code):
 # ---------REFUND-------------
 
 def refund(request, code):
-    sell_product = models.SellProduct.objects.get(code=code)
+    sell_product = get_object_or_404(models.SellProduct, code=code)
     if not sell_product.refunded:
-        models.Refund.objects.create(sell_product=sell_product)
-        sell_product.save()
+        if not models.Refund.objects.filter(sell_product=sell_product).exists():
+            models.Refund.objects.create(sell_product=sell_product)
+            sell_product.refunded = True
+            sell_product.save()
+            return HttpResponse("The product has been refunded successfully.")
+    return HttpResponse("The product has already been refunded.")
     return redirect('sellproduct_list')
 
 def refund_list(request):
@@ -193,13 +197,16 @@ def filter_entries(request):
     
         entries = models.EnterProduct.objects.filter(entered_at__gte=start_date, entered_at__lte=end_date)
         total_entries = entries.count()
-        total_entries_price = entries.aggregate(Sum('price'))['price__sum']
+        total_entries_price = entries.aggregate(Sum('price'))['price__sum'] or 0
         sales = models.SellProduct.objects.filter(sold_at__gte=start_date, sold_at__lte=end_date)
         total_sales = sales.count()
-        total_sales_price = sales.aggregate(Sum('price'))['price__sum']
-        total_price_per_product = sales.aggregate(Sum('product__price'))['product__price__sum']
-        total_expenses = sales.aggregate(Sum('price'))['price__sum']
+        total_sales_price = sales.aggregate(Sum('price'))['price__sum'] or 0
+        total_price_per_product = sales.aggregate(Sum('product__price'))['product__price__sum'] or 0
+        total_expenses = sales.aggregate(Sum('price'))['price__sum'] or 0 
         total_profit = total_entries_price - total_expenses
+        if total_entries == 0 and total_sales == 0:
+            return HttpResponse("No entries have been made within the given date range.")
+        
 
         context = {
             'entries': entries,
