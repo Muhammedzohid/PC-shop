@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required(login_url="login")
+@login_required(login_url="logi")
 def index(request):
     return render(request,"base.html")
 
