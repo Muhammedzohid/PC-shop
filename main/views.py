@@ -8,7 +8,9 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from datetime import datetime
 from . import models
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
+from django.urls import reverse
+
 # Create your views here.
 @login_required
 def index(request):
@@ -206,7 +208,6 @@ def filter_entries(request):
         total_profit = total_entries_price - total_expenses
         if total_entries == 0 and total_sales == 0:
             return HttpResponse("No entries have been made within the given date range.")
-        
 
         context = {
             'entries': entries,
@@ -220,6 +221,8 @@ def filter_entries(request):
         }
         
         return render(request,'filter/filter.html',context)
+
+    return HttpResponseRedirect(reverse('filter')) 
 
 
 

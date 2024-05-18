@@ -10,25 +10,26 @@
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name"><br><br>
+        <label for="name" >Name:</label>
+        <input type="text" id="name" name="name" value="{{ product.name }}"><br><br>
         <label for="category">Category:</label>
         <select id="category" name="category">
             {% for category in categories %}
-            <option value="{{ category.id }}">{{ category.name }}</option>
+            <option value="{{ category.id }}" {% if category.id == product.category.id %}selected{% endif %}>{{ category.name }}</option>
             {% endfor %}
         </select><br><br>
         <label for="price">Price:</label>
-        <input type="number" id="price" name="price"><br><br>
+        <input type="number" id="price" name="price" value="{{ product.price }}"><br><br>
         <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity"><br><br>
+        <input type="number" id="quantity" name="quantity" value="{{ product.quantity }}"><br><br>
         <label for="discount_price">Discount Price:</label>
-        <input type="number" id="discount_price" name="discount_price"><br><br>
+        <input type="number" id="discount_price" name="discount_price" value="{{ product.discount_price }}"><br><br>
         <label for="banner_img">Banner Image:</label>
         <input type="file" id="banner_img" name="banner_img"><br><br>
         <button type="submit">Save</button>
     </form>
 </div>
+
 <style>
     body {
         font-family: Arial, sans-serif;
