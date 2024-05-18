@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from . import models
-from django.contrib.auth import authenticate, , logout
+from django.contrib.auth import authenticate,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -13,17 +13,17 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required()
+@login_required(login_url="login")
 def index(request):
     return render(request,"base.html")
 
 # ---------CATEGORY-------------
-@login_required()
+@login_required(login_url="login")
 def category_list(request):
     categories = models.Category.objects.all()
     return render(request, 'category/list.html', {'categories': categories})
 
-@login_required()
+@login_required(login_url="login")
 def category_create(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -31,7 +31,7 @@ def category_create(request):
         return redirect('category_list')
     return render(request, 'category/create.html')
 
-@login_required()
+@login_required(login_url="login")
 def category_update(request, code):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -42,7 +42,7 @@ def category_update(request, code):
     category = models.Category.objects.get(code=code)
     return render(request, 'category/update.html', {'category': category})
 
-@login_required()
+@login_required(login_url="login")
 def category_delete(request, code):
     category = models.Category.objects.get(code=code)
     category.delete()
@@ -50,7 +50,7 @@ def category_delete(request, code):
 
 # ---------PRODUCT-------------
 
-@login_required()
+@login_required(login_url="login")
 def create_product(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -69,18 +69,18 @@ def create_product(request):
         categories = models.Category.objects.all()
         return render(request, 'product/create.html', {'categories': categories})
     
-@login_required()
+@login_required(login_url="login")
 def product_list(request):
     products = models.Product.objects.all()
     return render(request, 'product/list.html', {'products': products})
 
-@login_required()
+@login_required(login_url="login")
 def delete_product(request, code):
     product = models.Product.objects.get(code=code)
     product.delete()
     return redirect('product_list')
 
-@login_required()
+@login_required(login_url="login")
 def update_product(request, code):
     product = models.Product.objects.get(code=code)
     categories = models.Category.objects.all()
@@ -97,14 +97,14 @@ def update_product(request, code):
         return redirect('product_list')
     return render(request, 'product/update.html', {'product': product, 'categories':categories})
 
-@login_required()
+@login_required(login_url="login")
 def product_detail(request, code):
     product = get_object_or_404(models.Product, code=code)
     return render(request, 'product/detail.html', {'product': product}) 
 
 # ---------ENTER PRODUCT-------------
 
-@login_required()
+@login_required(login_url="login")
 def create_enter_product(request):
     if request.method == 'POST':
         product_id = request.POST.get('product_id')
@@ -116,12 +116,12 @@ def create_enter_product(request):
         products = models.Product.objects.all()
         return render(request, 'enter_product/create.html', {'products': products})
 
-@login_required() 
+@login_required(login_url="login") 
 def enter_product_detail(request, code):
     enter_product = get_object_or_404(models.EnterProduct, code=code)
     return render(request, 'enter_product/detail.html', {'enter_product': enter_product})
 
-@login_required()  
+@login_required(login_url="login")  
 def enter_product_list(request):
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
@@ -135,7 +135,7 @@ def enter_product_list(request):
 
 # ---------SELL PRODUCT-------------
 
-@login_required()
+@login_required(login_url="login")
 def sellproduct_list(request):
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
@@ -147,12 +147,12 @@ def sellproduct_list(request):
 
     return render(request, 'sell_product/list.html', {'sell_products': sell_products})
 
-@login_required()
+@login_required(login_url="login")
 def sellproduct_detail(request, code):
     sellproduct = get_object_or_404(models.SellProduct, code=code)
     return render(request, 'sell_product/detail.html', {'sellproduct': sellproduct})
 
-@login_required()
+@login_required(login_url="login")
 def sellproduct_create(request):
     if request.method == 'POST':
         product_id = request.POST.get('product_id')
@@ -164,7 +164,7 @@ def sellproduct_create(request):
         products = models.Product.objects.all()
         return render(request, 'sell_product/create.html', {'products': products})
 
-@login_required()   
+@login_required(login_url="login")   
 def sellproduct_update(request, code):
     sellproduct = get_object_or_404(models.SellProduct, code=code)
     if request.method == 'POST':
@@ -180,7 +180,7 @@ def sellproduct_update(request, code):
 
 # ---------REFUND-------------
 
-@login_required()
+@login_required(login_url="login")
 def refund(request, code):
     sell_product = get_object_or_404(models.SellProduct, code=code)
     if not sell_product.refunded:
@@ -191,23 +191,23 @@ def refund(request, code):
             return redirect("sellproduct_list")
     return HttpResponse("The product has already been refunded.")
 
-@login_required()
+@login_required(login_url="login")
 def refund_list(request):
     refunds = models.Refund.objects.all()
     return render(request, 'refund/list.html', {'refunds': refunds})
 
-@login_required()
+@login_required(login_url="login")
 def refund_detail(request,id):
     refund = models.Refund.objects.get(id=id)
     return render(request,'refund/detail.html',{'refund':refund})
 
 # ---------KIRIM CHIQIMLARNI HISOBLASH-------------
 
-@login_required()
+@login_required(login_url="login")
 def filter(request):
     return render(request,'filter/filter.html')
 
-@login_required()
+@login_required(login_url="login")
 def filter_entries(request):
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
@@ -268,7 +268,7 @@ def log_out(request):
         logout(request)
         return redirect('index')
 
-@login_required()
+@login_required(login_url="login")
 def edit_user(request):
     if request.method == 'POST':
         new_email = request.POST('email')
