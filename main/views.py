@@ -170,9 +170,8 @@ def refund(request, code):
             models.Refund.objects.create(sell_product=sell_product)
             sell_product.refunded = True
             sell_product.save()
-            return HttpResponse("The product has been refunded successfully.")
+            return redirect("sellproduct_list")
     return HttpResponse("The product has already been refunded.")
-    return redirect('sellproduct_list')
 
 def refund_list(request):
     refunds = models.Refund.objects.all()
@@ -191,12 +190,8 @@ def filter_entries(request):
     end_date = request.GET.get('end_date')
 
     if start_date and end_date:
-        try:
-            start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
-            end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
-        except ValueError:
-            return render(request, 'error.html', {'message': 'Sanalar noto\'g\'ri formatda'})
-    
+        start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
+        end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
         entries = models.EnterProduct.objects.filter(entered_at__gte=start_date, entered_at__lte=end_date)
         total_entries = entries.count()
         total_entries_price = entries.aggregate(Sum('price'))['price__sum'] or 0
@@ -207,7 +202,7 @@ def filter_entries(request):
         total_expenses = sales.aggregate(Sum('price'))['price__sum'] or 0 
         total_profit = total_entries_price - total_expenses
         if total_entries == 0 and total_sales == 0:
-            return HttpResponse("No entries have been made within the given date range.")
+            return HttpResponseRedirect(reverse("filter"))
 
         context = {
             'entries': entries,
