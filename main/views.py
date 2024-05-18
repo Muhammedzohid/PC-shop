@@ -260,7 +260,7 @@ def log_in(request):
                 return render(request,'auth/.html')
         except:
             return redirect('index')
-    return render(request, 'auth/.html')
+    return render(request, 'auth/login.html')
 
 
 def log_out(request):
