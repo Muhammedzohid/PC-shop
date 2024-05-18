@@ -1,72 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="container">
+        <h1>Refund Product List</h1>
 
+        <!-- Filtered Results -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Refunded At</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for refund in refunds %}
+                <tr>
+                    <td>{{ refund.refunded_at }}</td>
+                    <td><a href="{% url 'refund_detail' refund.id %}">{{refund.sell_product.quantity}}</a></td>
+                    <td>{{ refund.price }} uzs</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding-top: 50px;
+        }
 
-    <h1>Refund Product List</h1>
+        .container {
+            margin-top: 50px;
+        }
 
-    <!-- Filtered Results -->
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Refunded At</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for refund in refunds %}
-            <tr>
-                <td>{{ refund.refunded_at }}</td>
-                <td><a href="{% url 'refund_detail' refund.id %}">{{refund.sell_product.quantity}}</a></td>
-                <td>{{ refund.price }} uzs</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        padding-top: 100px;
-    }
-    form {
-        margin-bottom: 20px;
-    }
-    label {
-        margin-right: 10px;
-    }
-    input[type="number"] {
-        width: 100px;
-        padding: 5px;
-        margin-right: 10px;
-    }
-    button[type="submit"] {
-        padding: 5px 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    button[type="submit"]:hover {
-        background-color: #45a049;
-    }
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    th, td {
-        padding: 8px;
-        text-align: left;
-    }
-    th {
-        background-color: #4CAF50;
-        color: white;
-    }
-    tr:hover {
-        background-color: #f2f2f2;
-    }
-</style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
 
+        .table th, .table td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
 
+        .table th {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
 {% endblock %}

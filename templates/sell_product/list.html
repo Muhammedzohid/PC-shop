@@ -1,91 +1,109 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="container">
+        <h1>Sell Product List</h1>
 
+        <!-- Filter Form -->
+        <form method="get" class="filter-form">
+            <div class="form-group">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start_date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end_date" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
 
+        <!-- Filtered Results -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Refund Status</th>
+                </tr>   
+            </thead>
+            <tbody>
+                {% for sell_product in sell_products %}
+                <tr>
+                    <td><a href="{% url 'sellproduct_detail' sell_product.code %}">{{ sell_product.product.name }}</a></td>
+                    <td>{{ sell_product.quantity }}</td>
+                    <td>{{ sell_product.sold_at }}</td>
+                    <td>{{ sell_product.price }} uzs</td>
+                    <td>
+                        {% if sell_product.refunded %}
+                            Product Refunded
+                        {% else %}
+                            Product is not refunded
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <h1>Sell Product List</h1>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding-top: 50px;
+        }
 
-    <!-- Filter Form -->
-    <form method="get">
-        <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" name="start_date">
-        <label for="end-date">End Date:</label>
-        <input type="date" id="end-date" name="end_date">
-        <button type="submit">Filter</button>
-    </form>
+        .container {
+            margin-top: 50px;
+        }
 
-    <!-- Filtered Results -->
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Data</th>
-                <th>Price</th>
-                <th>Refund status</th>
-            </tr>   
-        </thead>
-        <tbody>
-            {% for sell_product in sell_products %}
-            <tr>
-               <td><a href="{% url 'sellproduct_detail' sell_product.code %}">{{ sell_product.product.name }}</a></td>
-                <td>{{ sell_product.quantity }}</td>
-                <td>{{ sell_product.sold_at }}</td>
-                <td>{{ sell_product.price }} uzs</td>
-                <td>
-                    {% if sell_product.refunded == true %}
-                        Product Refunded
-                    {% else %}
-                        Product is not refunded
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        padding-top: 100px;
-    }
-    form {
-        margin-bottom: 20px;
-    }
-    label {
-        margin-right: 10px;
-    }
-    input[type="number"] {
-        width: 100px;
-        padding: 5px;
-        margin-right: 10px;
-    }
-    button[type="submit"] {
-        padding: 5px 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    button[type="submit"]:hover {
-        background-color: #45a049;
-    }
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    th, td {
-        padding: 8px;
-        text-align: left;
-    }
-    th {
-        background-color: #4CAF50;
-        color: white;
-    }
-    tr:hover {
-        background-color: #f2f2f2;
-    }
-</style>
+        .filter-form {
+            margin-bottom: 20px;
+        }
 
+        .form-group {
+            margin-bottom: 15px;
+        }
 
+        .form-control {
+            width: 200px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
 {% endblock %}

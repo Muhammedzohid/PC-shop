@@ -1,7 +1,21 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 {% load static %}
-
-{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Enlink - Admin Dashboard Template</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'dashboard/images/logo/favicon.png' %}">
+    
+    <!-- page css -->
+    <link href="{% static 'dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+    
+    <!-- Core css -->
+    <link href="{% static 'dashboard/css/app.min.css' %}" rel="stylesheet">
+    
+</head>
             <!-- Begin Main Content Area -->
             <main class="main-content">
                 <div class="breadcrumb-area breadcrumb-height" data-bg-image="{% static 'front/images/breadcrumb/bg/1-1-1919x388.jpg' %}">
@@ -154,5 +168,5 @@
                     background-color: #45a049;
                 }
             </style>
-{% endblock content %}
+
     

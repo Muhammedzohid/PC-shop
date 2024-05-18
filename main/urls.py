@@ -11,7 +11,7 @@ urlpatterns = [
     # ---------ENTER PRODUCT-------------
     path('enter-product/create/', views.create_enter_product, name='create_enter_product'),
     path('enter-product/list/', views.enter_product_list, name='enter_product_list'),
-    path('enter_product/<str:code>/', views.enter_product_detail, name='enter_product_detail'),
+    path('enter-product/<str:code>/', views.enter_product_detail, name='enter_product_detail'),
     # ---------PRODUCT-------------
     path('product/create/', views.create_product, name='create_product'),
     path('product/list/', views.product_list, name='product_list'),

@@ -2,21 +2,42 @@
 {% block content %}
     <div class="container">
         <h1>Category List</h1>
-        <ul>
-            {% for category in categories %}
-                <li class="p-b-15">{{ category.name }} - <a href="{% url 'category_update' category.code %}" class="btn btn-primary">Update</a> | <a href="{% url 'category_delete' category.code %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{ category.name }} category?')">Delete</a></li>
-            {% endfor %}
-        </ul>
+        <table class="table category-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <a href="{% url 'category_update' category.code %}" class="btn btn-primary"><i class="fas fa-edit"></i> Update</a>
+                            <a href="{% url 'category_delete' category.code %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{ category.name }} category?')"><i class="fas fa-trash-alt"></i> Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         <a href="{% url 'category_create' %}" class="btn btn-primary">Create New Category</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        ul{
-            padding-bottom: 20px;
+        .category-table {
+            width: 100%;
+        }
+        .category-table th, .category-table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .category-table th {
+            font-weight: bold;
         }
     </style>
-
 {% endblock %}

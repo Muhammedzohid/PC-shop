@@ -7,7 +7,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Category</title>
     <style>
-        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding-top: 100px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -16,7 +52,7 @@
         {% csrf_token %}
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name"><br><br>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
