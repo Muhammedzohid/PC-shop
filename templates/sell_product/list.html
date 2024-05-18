@@ -23,6 +23,7 @@
                 <th>Quantity</th>
                 <th>Data</th>
                 <th>Price</th>
+                <th>Refund status</th>
             </tr>   
         </thead>
         <tbody>
@@ -32,6 +33,13 @@
                 <td>{{ sell_product.quantity }}</td>
                 <td>{{ sell_product.sold_at }}</td>
                 <td>{{ sell_product.price }} uzs</td>
+                <td>
+                    {% if sell_product.refunded == true %}
+                        Product Refunded
+                    {% else %}
+                        Product is not refunded
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
