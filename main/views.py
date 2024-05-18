@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from . import models
 from django.contrib.auth import authenticate,logout
@@ -247,17 +248,18 @@ def filter_entries(request):
 # ---------AUTH-------------
 
 
+
 def log_in(request):
     if request.method == 'POST':
         try:
             username = request.POST.get('username')
             password = request.POST.get('password')
-            user = authenticate(username=username, password=password)
+            user = authenticate(request, username=username, password=password)
             if user is not None:
-                (request, user)
+                login(request, user)  # Log in the user
                 return redirect('index')
             else:
-                return render(request,'auth/.html')
+                return render(request, 'auth/login.html', {'error': 'Invalid credentials'})
         except:
             return redirect('index')
     return render(request, 'auth/login.html')
